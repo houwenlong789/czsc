@@ -20,11 +20,30 @@ class Center:
     中枢信息
     """
 
-    def __init__(self, bars: List[RawBar], direction: Direction, source: CenterFrom,
-                 main_center, expand_center,
+    @property
+    def zg(self):
+        if self.direction == Direction.Up:
+            return min(self.list_bi[0].high,
+                       self.list_bi[2].high)
+        else:
+            return min(self.list_bi[1].high,
+                       self.list_bi[3].high)
+
+    @property
+    def zd(self):
+        if self.direction == Direction.UP:
+            return max(self.list_bi[1].low,
+                       self.list_bi[3].low)
+        else:
+            return max(self.list_bi[0].low,
+                       self.list_bi[2].low)
+
+    def __init__(self, bars: List[BI], direction: Direction,
+                 source: CenterFrom = CenterFrom.ORIGIN,
+                 main_center=None, expand_center=None,
                  level: int = 0):
         # 原始数据
-        self.bar_raw = bars
+        self.list_bi = bars
 
         # 中枢构建方式
         self.source: CenterFrom = source
@@ -36,3 +55,13 @@ class Center:
         self.main_center: Center = main_center
         # 扩张 中枢
         self.expand_center: Center = expand_center
+
+    def is_valid_center(self):
+        """
+       是否是有效的中枢
+       """
+        if len(self.list_bi) < 4:
+            print(self.list_bi)
+            return False
+
+        return self.zg > self.zd
