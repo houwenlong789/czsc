@@ -14,6 +14,18 @@ class CenterFrom(Enum):
     # 中枢延伸
     CENTER_STRETCH = 3
 
+class TrendType(Enum):
+    """
+    两个中枢构成的类型
+    """
+    # 上升
+    RISE = 0
+    # 下跌
+    FALL = 1
+    # 更大的趋势
+    BIG_CENTER = 2
+
+
 
 class Center:
     """
@@ -55,6 +67,60 @@ class Center:
         self.main_center: Center = main_center
         # 扩张 中枢
         self.expand_center: Center = expand_center
+
+        # 中枢是否破坏
+        self.__confirm = False
+
+    def has_confirm(self):
+        return self.__confirm
+
+    # def compare_center(self, center):
+    #     """
+    #     比较两个中枢
+    #     :param center: 后一个中枢
+    #     :return: 返回两个中枢的趋势
+    #     """
+    #     has_same_range = self.zd <= center.zg <= self.zg or self.zd <= center.zd <= self.zg
+    #     if has_same_range:
+    #         return consts.trend_none
+    #     if center.zd > self.zg:
+    #         return consts.trend_up
+    #     if center.zg < self.zd:
+    #         return consts.trend_down
+    #     return consts.trend_none
+
+    def position_in_center(self, compare_price):
+        """
+        判断在中枢的位置  1  上  0 中  -1 下
+        :param compare_price:
+        :return:
+        """
+        if compare_price > self.zg:
+            return 1
+        if compare_price < self.zd:
+            return -1
+        return 0
+
+    def trend_style(self, line_gg, line_dd):
+        """
+        判断趋势类型
+        """
+        has_same_range = self.dd <= line_dd <= self.gg or self.dd <= self.gg
+        if has_same_range:
+            return TrendType.BIG_CENTER
+
+        if line_dd > self.gg:
+            return TrendType.RISE
+        if line_gg < self.dd:
+            return TrendType.FALL
+        raise RuntimeError('请检查趋势逻辑')
+
+    def confirm_center(self):
+        """
+        确认中枢
+        :return:
+        """
+        self.__confirm = True
 
     def is_valid_center(self):
         """
