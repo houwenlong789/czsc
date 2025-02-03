@@ -28,7 +28,7 @@ def test_kline_pro():
                    close=row['close'], high=row['high'], low=row['low'], vol=row['vol'])
             for i, row in kline.iterrows()]
     ka = CZSC(bars)
-    # ka.open_in_browser()
+   # ka.open_in_browser()
     file_html = 'czsc_render.html'
     chart = ka.to_echarts()
     chart.render(file_html)

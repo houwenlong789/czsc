@@ -14,7 +14,7 @@ from datetime import datetime
 import pandas as pd
 from typing import List
 from czsc.analyze import CZSC
-from czsc.signals import get_default_signals, get_selector_signals
+from czsc.signals.signals import get_default_signals, get_selector_signals
 from czsc.data.jq import get_index_stocks
 from czsc.objects import Signal, Factor
 from czsc.extend.tdx import TdxStoreage, Market, get_kline

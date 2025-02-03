@@ -2,8 +2,8 @@ from czsc.data.jq import *
 import traceback
 from datetime import datetime
 from typing import List
-from czsc.analyze import CZSC, CzscTrader
-from czsc.signals import get_default_signals
+from czsc.analyze import CZSC
+from czsc.signals.signals import get_default_signals
 from czsc.objects import Signal, Factor
 from czsc.extend.analyzeExtend import CZSCExtendTrader
 
@@ -67,3 +67,5 @@ def test_analyzeData():
     for code in codes:
         trader = CZSCExtendTrader(symbol=code, max_count=1000)
         trader.open_in_browser()
+
+

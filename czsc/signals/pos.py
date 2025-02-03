@@ -8,7 +8,9 @@ describe: 持仓相关信号
 from collections import OrderedDict
 from czsc.objects import Operate, Signal, PositionLong
 from czsc.traders.advanced import CzscAdvancedTrader
+import locale
 
+locale.setlocale(locale.LC_CTYPE, 'chinese')
 
 def get_s_long01(cat: CzscAdvancedTrader, th=300):
     """多头持仓信号：亏损"""

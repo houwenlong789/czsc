@@ -14,15 +14,17 @@ path_gm_logs                gm_logs的路径，默认值：C:/gm_logs
 
 环境变量设置样例：
 # 使用 os 模块设置
-os.environ['strategy_id'] = 'c7991760-****-11eb-b66a-00163e0c87d1'
-os.environ['account_id'] = 'c7991760-****-11eb-b66a-00163e0c87d1'
-os.environ['wx_key'] = '2daec96b-****-4f83-818b-2952fe2731c0'
-os.environ['max_sym_pos'] = '0.5'
-os.environ['path_gm_logs'] = 'C:/gm_logs'
+
 """
+
 from czsc.gm_utils import *
 from czsc.strategies import trader_strategy_a as strategy
 
+# os.environ['strategy_id'] = '475a918b-e9f9-11ec-becd-00d8619b544d'
+# os.environ['account_id'] = '1db0ec26-08b1-11ec-a731-00163e0a4100'
+# os.environ['wx_key'] = '2daec96b-****-4f83-818b-2952fe2731c0'
+# os.environ['max_sym_pos'] = '0.5'
+# os.environ['path_gm_logs'] = 'd:/gm_logs'
 
 def init(context):
     symbols = [
